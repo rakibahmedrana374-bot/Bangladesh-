@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07111f">
+
+<title>Ludo Arena</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#07111f;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+button,input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+.container{
+    width:min(1120px,92%);
+    margin:auto;
+}
+
+/* NAVBAR */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#0b1728ee;
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid #ffffff12;
+}
+
+.nav{
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:900;
+}
+
+.logo span{
+    color:#ffd32a;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.nav-link{
+    padding:10px 14px;
+    color:#aeb8c8;
+}
+
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:12px 20px;
+    background:#ffd32a;
+    color:#111;
+    font-weight:800;
+}
+
+.btn-outline{
+    background:transparent;
+    color:#fff;
+    border:1px solid #ffffff20;
+}
+
+/* HERO */
+
+.hero{
+    padding:90px 0 75px;
+    text-align:center;
+    background:
+        radial-gradient(circle at 50% 0,#284a82 0,#07111f 60%);
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 15px;
+    border-radius:30px;
+    background:#ffd32a12;
+    border:1px solid #ffd32a30;
+    color:#ffd32a;
+    margin-bottom:22px;
+}
+
+.hero h1{
+    font-size:58px;
+    line-height:1.05;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:#ffd32a;
+}
+
+.hero p{
+    max-width:680px;
+    margin:auto;
+    color:#aeb9c9;
+    line-height:1.8;
+    font-size:17px;
+}
+
+.hero-actions{
+    margin-top:30px;
+}
+
+.stats{
+    margin:55px auto 0;
+    display:flex;
+    justify-content:center;
+    gap:70px;
+}
+
+.stat h3{
+    color:#ffd32a;
+    font-size:29px;
+}
+
+.stat span{
+    color:#8996a9;
+    font-size:13px;
+}
+
+/* SECTION */
+
+section{
+    padding:75px 0;
+}
+
+.section-head{
+    text-align:center;
+    margin-bottom:42px;
+}
+
+.section-head h2{
+    font-size:36px;
+}
+
+.section-head p{
+    margin-top:10px;
+    color:#8996a9;
+}
+
+/* FEATURES */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    padding:28px;
+    border-radius:18px;
+    background:#0f1c30;
+    border:1px solid #ffffff0e;
+}
+
+.card-icon{
+    font-size:34px;
+    margin-bottom:18px;
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#909caf;
+    line-height:1.7;
+}
+
+/* TOURNAMENT */
+
+.tournament-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.tournament{
+    padding:25px;
+    border-radius:18px;
+    background:#0f1c30;
+    border:1px solid #ffffff0e;
+}
+
+.tournament-head{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+
+.tournament-title{
+    font-size:18px;
+    font-weight:800;
+}
+
+.open{
+    color:#5ee58d;
+    font-size:13px;
+}
+
+.info{
+    display:flex;
+    justify-content:space-between;
+    padding:9px 0;
+    color:#9aa6b8;
+    border-bottom:1px solid #ffffff08;
+}
+
+.info strong{
+    color:#fff;
+}
+
+.prize{
+    margin:18px 0;
+    color:#ffd32a;
+    font-size:25px;
+    font-weight:900;
+}
+
+.join-btn{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:9px;
+    background:#ffd32a;
+    font-weight:900;
+}
+
+/* WALLET */
+
+.wallet{
+    padding:35px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#142744,#0e192c);
+    border:1px solid #ffffff10;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+}
+
+.wallet small{
+    color:#8996a9;
+}
+
+.balance{
+    margin-top:8px;
+    color:#ffd32a;
+    font-size:42px;
+    font-weight:900;
+}
+
+.wallet-actions{
+    display:flex;
+    gap:10px;
+}
+
+.wallet-actions button{
+    padding:12px 20px;
+    border-radius:9px;
+    font-weight:800;
+}
+
+.deposit{
+    background:#ffd32a;
+    border:0;
+}
+
+.withdraw{
+    background:transparent;
+    border:1px solid #ffffff20;
+    color:#fff;
+}
+
+/* FAQ */
+
+.faq{
+    width:min(780px,100%);
+    margin:auto;
+}
+
+.faq-item{
+    margin-bottom:10px;
+    background:#0f1c30;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.faq-question{
+    padding:19px;
+    display:flex;
+    justify-content:space-between;
+    cursor:pointer;
+    font-weight:800;
+}
+
+.faq-answer{
+    display:none;
+    padding:0 19px 19px;
+    color:#929daf;
+    line-height:1.7;
+}
+
+.faq-item.active .faq-answer{
+    display:block;
+}
+
+/* FOOTER */
+
+footer{
+    padding:35px 0;
+    background:#040a12;
+    text-align:center;
+    color:#728096;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:#000b;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(430px,100%);
+    padding:28px;
+    border-radius:18px;
+    background:#101d31;
+    border:1px solid #ffffff15;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+}
+
+.close{
+    border:0;
+    background:none;
+    color:#fff;
+    font-size:25px;
+}
+
+.field{
+    width:100%;
+    padding:13px;
+    margin-bottom:12px;
+    border-radius:9px;
+    outline:0;
+    border:1px solid #ffffff18;
+    background:#07111f;
+    color:#fff;
+}
+
+.form-btn{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:9px;
+    background:#ffd32a;
+    font-weight:900;
+}
+
+.form-message{
+    margin-top:13px;
+    color:#aeb9c9;
+    font-size:14px;
+    line-height:1.5;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:800px){
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .tournament-grid{
+        grid-template-columns:1fr;
+    }
+
+    .wallet{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .wallet-actions{
+        width:100%;
+    }
+
+    .wallet-actions button{
+        flex:1;
+    }
+
+    .stats{
+        gap:30px;
+        flex-wrap:wrap;
+    }
+}
+
+@media(max-width:500px){
+
+    .nav-link{
+        display:none;
+    }
+
+    .hero{
+        padding:70px 0;
+    }
+
+    .hero h1{
+        font-size:36px;
+    }
+
+    section{
+        padding:55px 0;
+    }
+
+    .section-head h2{
+        font-size:29px;
+    }
+
+    .balance{
+        font-size:35px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header>
+
+<div class="container nav">
+
+    <a href="#" class="logo">
+        LUDO<span>ARENA</span>
+    </a>
+
+    <div class="nav-right">
+
+        <a href="#tournaments" class="nav-link">
+            Tournaments
+        </a>
+
+        <button
+            class="btn"
+            onclick="openModal('loginModal')">
+            Login
+        </button>
+
+    </div>
+
+</div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<main>
+
+<section class="hero">
+
+<div class="container">
+
+    <div class="badge">
+        🎲 Ludo Tournament Platform
+    </div>
+
+    <h1>
+        Play Ludo.<br>
+        <span>Compete & Win.</span>
+    </h1>
+
+    <p>
+        Join tournaments, manage your account and
+        compete with players through a fast and simple
+        gaming platform.
+    </p>
+
+    <div class="hero-actions">
+
+        <a
+            href="#tournaments"
+            class="btn">
+            Browse Tournaments
+        </a>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <h3 id="playerCount">0</h3>
+            <span>Players</span>
+        </div>
+
+        <div class="stat">
+            <h3 id="tournamentCount">0</h3>
+            <span>Tournaments</span>
+        </div>
+
+        <div class="stat">
+            <h3>24/7</h3>
+            <span>Support</span>
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section>
+
+<div class="container">
+
+<div class="section-head">
+
+    <h2>Platform Features</h2>
+
+    <p>
+        Backend connect করলে এগুলো real data দিয়ে চালানো যাবে।
+    </p>
+
+</div>
+
+
+<div class="features">
+
+    <div class="card">
+
+        <div class="card-icon">🏆</div>
+
+        <h3>Tournaments</h3>
+
+        <p>
+            Tournament list backend থেকে load করে
+            players-কে join করার সুযোগ দিন।
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-icon">👤</div>
+
+        <h3>User Account</h3>
+
+        <p>
+            Login, registration, profile এবং account
+            information API-এর মাধ্যমে পরিচালনা করুন।
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-icon">💰</div>
+
+        <h3>Wallet</h3>
+
+        <p>
+            আপনার backend wallet API connect করে
+            balance ও transaction দেখাতে পারবেন।
+        </p>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= TOURNAMENT ================= -->
+
+<section id="tournaments">
+
+<div class="container">
+
+<div class="section-head">
+
+    <h2>Available Tournaments</h2>
+
+    <p>
+        Live tournament data এখানে API থেকে আসবে।
+    </p>
+
+</div>
+
+
+<div
+    id="tournamentList"
+    class="tournament-grid">
+
+    <!-- JavaScript API data এখানে বসাবে -->
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= WALLET ================= -->
+
+<section>
+
+<div class="container">
+
+<div class="wallet">
+
+    <div>
+
+        <small>
+            Account Balance
+        </small>
+
+        <div class="balance">
+
+            ৳ <span id="balance">
+                0.00
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="wallet-actions">
+
+        <button
+            class="deposit"
+            onclick="openModal('depositModal')">
+            Deposit
+        </button>
+
+        <button
+            class="withdraw"
+            onclick="openModal('withdrawModal')">
+            Withdraw
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= FAQ ================= -->
+
+<section>
+
+<div class="container">
+
+<div class="section-head">
+
+    <h2>FAQ</h2>
+
+</div>
+
+
+<div class="faq">
+
+    <div class="faq-item">
+
+        <div class="faq-question">
+
+            <span>
+                How can I register?
+            </span>
+
+            <span>+</span>
+
+        </div>
+
+        <div class="faq-answer">
+
+            Login/Register button থেকে আপনার
+            registration form ব্যবহার করতে পারবেন।
+
+        </div>
+
+    </div>
+
+
+    <div class="faq-item">
+
+        <div class="faq-question">
+
+            <span>
+                How can I join a tournament?
+            </span>
+
+            <span>+</span>
+
+        </div>
+
+        <div class="faq-answer">
+
+            Login করার পর tournament-এর Join button
+            চাপলে আপনার backend join API call হবে।
+
+        </div>
+
+    </div>
+
+
+    <div class="faq-item">
+
+        <div class="faq-question">
+
+            <span>
+                Wallet কীভাবে কাজ করবে?
+            </span>
+
+            <span>+</span>
+
+        </div>
+
+        <div class="faq-answer">
+
+            Wallet balance আপনার backend থেকে API-এর
+            মাধ্যমে এই frontend-এ দেখানো হবে।
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div class="container">
+
+    <p>
+        © 2026 Ludo Arena. All Rights Reserved.
+    </p>
+
+</div>
+
+</footer>
+
+
+<!-- ================= LOGIN MODAL ================= -->
+
+<div
+    id="loginModal"
+    class="modal">
+
+<div class="modal-box">
+
+<div class="modal-header">
+
+    <h2>
+        Login
+    </h2>
+
+    <button
+        class="close"
+        onclick="closeModal('loginModal')">
+        ×
+    </button>
+
+</div>
+
+
+<form id="loginForm">
+
+    <input
+        id="loginPhone"
+        class="field"
+        type="text"
+        placeholder="Mobile Number"
+        required>
+
+
+    <input
+        id="loginPassword"
+        class="field"
+        type="password"
+        placeholder="Password"
+        required>
+
+
+    <button
+        class="form-btn"
+        type="submit">
+        Login
+    </button>
+
+</form>
+
+
+<p
+    id="loginMessage"
+    class="form-message">
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ================= DEPOSIT MODAL ================= -->
+
+<div
+    id="depositModal"
+    class="modal">
+
+<div class="modal-box">
+
+<div class="modal-header">
+
+    <h2>
+        Deposit
+    </h2>
+
+    <button
+        class="close"
+        onclick="closeModal('depositModal')">
+        ×
+    </button>
+
+</div>
+
+
+<form id="depositForm">
+
+    <input
+        id="depositAmount"
+        class="field"
+        type="number"
+        min="1"
+        step="0.01"
+        placeholder="Amount"
+        required>
+
+
+    <button
+        class="form-btn"
+        type="submit">
+        Continue
+    </button>
+
+</form>
+
+
+<p
+    id="depositMessage"
+    class="form-message">
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ================= WITHDRAW MODAL ================= -->
+
+<div
+    id="withdrawModal"
+    class="modal">
+
+<div class="modal-box">
+
+<div class="modal-header">
+
+    <h2>
+        Withdraw
+    </h2>
+
+    <button
+        class="close"
+        onclick="closeModal('withdrawModal')">
+        ×
+    </button>
+
+</div>
+
+
+<form id="withdrawForm">
+
+    <input
+        id="withdrawAmount"
+        class="field"
+        type="number"
+        min="1"
+        step="0.01"
+        placeholder="Amount"
+        required>
+
+
+    <button
+        class="form-btn"
+        type="submit">
+        Continue
+    </button>
+
+</form>
+
+
+<p
+    id="withdrawMessage"
+    class="form-message">
+</p>
+
+</div>
+
+</div>
+
+
+<script>
+
+/*
+==================================================
+BACKEND CONFIGURATION
+==================================================
+
+এখানে তোমার backend server-এর address বসাবে।
+
+Example:
+
+const API_BASE_URL =
+"https://api.yourdomain.com";
+
+অথবা একই domain হলে:
+
+const API_BASE_URL = "/api";
+
+*/
+
+const API_BASE_URL = "/api";
+
+
+/*
+==================================================
+API HELPER
+==================================================
+*/
+
+async function apiRequest(
+    endpoint,
+    options = {}
+){
+
+    const response =
+        await fetch(
+            API_BASE_URL + endpoint,
+            {
+                credentials:"include",
+
+                headers:{
+                    "Content-Type":
+                    "application/json",
+
+                    ...(options.headers || {})
+                },
+
+                ...options
+            }
+        );
+
+
+    let data = null;
+
+    try{
+
+        data = await response.json();
+
+    }catch(error){
+
+        data = null;
+
+    }
+
+
+    if(!response.ok){
+
+        throw new Error(
+            data?.message ||
+            "Server request failed"
+        );
+
+    }
+
+
+    return data;
+
+}
+
+
+/*
+==================================================
+LOAD USER
+==================================================
+
+Expected backend response:
+
+{
+    "authenticated": true,
+    "user": {
+        "id": 1,
+        "name": "User"
+    },
+    "balance": 500
+}
+
+*/
+
+async function loadUser(){
+
+    try{
+
+        const data =
+            await apiRequest("/me");
+
+
+        if(data.authenticated){
+
+            document
+                .getElementById("balance")
+                .innerText =
+                Number(
+                    data.balance || 0
+                ).toFixed(2);
+
+        }
+
+    }catch(error){
+
+        console.log(
+            "User not logged in"
+        );
+
+    }
+
+}
+
+
+/*
+==================================================
+LOAD TOURNAMENTS
+==================================================
+
+Expected backend response:
+
+{
+    "tournaments":[
+        {
+            "id":1,
+            "name":"Mega Ludo",
+            "players":128,
+            "maxPlayers":256,
+            "entryFee":20,
+            "prize":2000,
+            "status":"OPEN"
+        }
+    ]
+}
+
+*/
+
+async function loadTournaments(){
+
+    const container =
+        document.getElementById(
+            "tournamentList"
+        );
+
+
+    try{
+
+        const data =
+            await apiRequest(
+                "/tournaments"
+            );
+
+
+        const tournaments =
+            data.tournaments || [];
+
+
+        document
+            .getElementById(
+                "tournamentCount"
+            )
+            .innerText =
+            tournaments.length;
+
+
+        container.innerHTML = "";
+
+
+        tournaments.forEach(
+            tournament => {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+                card.className =
+                    "tournament";
+
+
+                card.innerHTML = `
+
+                    <div class="tournament-head">
+
+                        <div class="tournament-title">
+                            ${escapeHTML(
+                                tournament.name
+                            )}
+                        </div>
+
+                        <div class="open">
+                            ${escapeHTML(
+                                tournament.status ||
+                                "OPEN"
+                            )}
+                        </div>
+
+                    </div>
+
+
+                    <div class="info">
+                        <span>Players</span>
+                        <strong>
+                            ${Number(
+                                tournament.players || 0
+                            )}/
+                            ${Number(
+                                tournament.maxPlayers || 0
+                            )}
+                        </strong>
+                    </div>
+
+
+                    <div class="info">
+                        <span>Entry Fee</span>
+                        <strong>
+                            ৳${Number(
+                                tournament.entryFee || 0
+                            ).toFixed(2)}
+                        </strong>
+                    </div>
+
+
+                    <div class="prize">
+                        Prize ৳${Number(
+                            tournament.prize || 0
+                        ).toFixed(2)}
+                    </div>
+
+
+                    <button
+                        class="join-btn"
+                        onclick="joinTournament(
+                            ${Number(tournament.id)}
+                        )">
+
+                        Join Tournament
+
+                    </button>
+
+                `;
+
+
+                container.appendChild(card);
+
+            }
+        );
+
+
+    }catch(error){
+
+        container.innerHTML = `
+
+            <div class="card">
+
+                <h3>
+                    Tournament load করা যায়নি
+                </h3>
+
+                <p>
+                    Backend API চালু আছে কিনা
+                    এবং /api/tournaments endpoint
+                    সঠিক কিনা দেখুন।
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/*
+==================================================
+JOIN TOURNAMENT
+==================================================
+*/
+
+async function joinTournament(
+    tournamentId
+){
+
+    try{
+
+        const data =
+            await apiRequest(
+                "/tournaments/" +
+                tournamentId +
+                "/join",
+                {
+                    method:"POST"
+                }
+            );
+
+
+        alert(
+            data.message ||
+            "Tournament joined successfully"
+        );
+
+
+        loadTournaments();
+        loadUser();
+
+
+    }catch(error){
+
+        alert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/*
+==================================================
+LOGIN
+==================================================
+*/
+
+document
+    .getElementById("loginForm")
+    .addEventListener(
+        "submit",
+        async function(event){
+
+            event.preventDefault();
+
+
+            const phone =
+                document
+                .getElementById(
+                    "loginPhone"
+                )
+                .value
+                .trim();
+
+
+            const password =
+                document
+                .getElementById(
+                    "loginPassword"
+                )
+                .value;
+
+
+            const message =
+                document
+                .getElementById(
+                    "loginMessage"
+                );
+
+
+            message.innerText =
+                "Logging in...";
+
+
+            try{
+
+                const data =
+                    await apiRequest(
+                        "/login",
+                        {
+                            method:"POST",
+
+                            body:JSON.stringify({
+
+                                phone:phone,
+
+                                password:password
+
+                            })
+                        }
+                    );
+
+
+                message.innerText =
+                    data.message ||
+                    "Login successful";
+
+
+                await loadUser();
+
+
+                setTimeout(
+                    function(){
+
+                        closeModal(
+                            "loginModal"
+                        );
+
+                    },
+                    700
+                );
+
+
+            }catch(error){
+
+                message.innerText =
+                    error.message;
+
+            }
+
+        }
+    );
+
+
+/*
+==================================================
+DEPOSIT
+==================================================
+*/
+
+document
+    .getElementById("depositForm")
+    .addEventListener(
+        "submit",
+        async function(event){
+
+            event.preventDefault();
+
+
+            const amount =
+                Number(
+                    document
+                    .getElementById(
+                        "depositAmount"
+                    )
+                    .value
+                );
+
+
+            const message =
+                document
+                .getElementById(
+                    "depositMessage"
+                );
+
+
+            message.innerText =
+                "Processing...";
+
+
+            try{
+
+                const data =
+                    await apiRequest(
+                        "/wallet/deposit",
+                        {
+                            method:"POST",
+
+                            body:JSON.stringify({
+                                amount:amount
+                            })
+                        }
+                    );
+
+
+                message.innerText =
+                    data.message ||
+                    "Deposit request created";
+
+
+                loadUser();
+
+
+            }catch(error){
+
+                message.innerText =
+                    error.message;
+
+            }
+
+        }
+    );
+
+
+/*
+==================================================
+WITHDRAW
+==================================================
+*/
+
+document
+    .getElementById("withdrawForm")
+    .addEventListener(
+        "submit",
+        async function(event){
+
+            event.preventDefault();
+
+
+            const amount =
+                Number(
+                    document
+                    .getElementById(
+                        "withdrawAmount"
+                    )
+                    .value
+                );
+
+
+            const message =
+                document
+                .getElementById(
+                    "withdrawMessage"
+                );
+
+
+            message.innerText =
+                "Processing...";
+
+
+            try{
+
+                const data =
+                    await apiRequest(
+                        "/wallet/withdraw",
+                        {
+                            method:"POST",
+
+                            body:JSON.stringify({
+                                amount:amount
+                            })
+                        }
+                    );
+
+
+                message.innerText =
+                    data.message ||
+                    "Withdrawal request created";
+
+
+                loadUser();
+
+
+            }catch(error){
+
+                message.innerText =
+                    error.message;
+
+            }
+
+        }
+    );
+
+
+/*
+==================================================
+MODAL
+==================================================
+*/
+
+function openModal(id){
+
+    document
+        .getElementById(id)
+        .classList
+        .add("show");
+
+}
+
+
+function closeModal(id){
+
+    document
+        .getElementById(id)
+        .classList
+        .remove("show");
+
+}
+
+
+document
+    .querySelectorAll(".modal")
+    .forEach(
+        modal => {
+
+            modal.addEventListener(
+                "click",
+                function(event){
+
+                    if(
+                        event.target === modal
+                    ){
+
+                        modal.classList.remove(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+/*
+==================================================
+FAQ
+==================================================
+*/
+
+document
+    .querySelectorAll(
+        ".faq-question"
+    )
+    .forEach(
+        question => {
+
+            question.addEventListener(
+                "click",
+                function(){
+
+                    const item =
+                        question.parentElement;
+
+
+                    item.classList.toggle(
+                        "active"
+                    );
+
+
+                    const icon =
+                        question.querySelector(
+                            "span:last-child"
+                        );
+
+
+                    icon.innerText =
+                        item.classList.contains(
+                            "active"
+                        )
+                        ? "−"
+                        : "+";
+
+                }
+            );
+
+        }
+    );
+
+
+/*
+==================================================
+SECURITY: HTML ESCAPE
+==================================================
+*/
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replace(
+            /[&<>"']/g,
+            function(char){
+
+                return {
+
+                    "&":"&amp;",
+
+                    "<":"&lt;",
+
+                    ">":"&gt;",
+
+                    '"':"&quot;",
+
+                    "'":"&#039;"
+
+                }[char];
+
+            }
+        );
+
+}
+
+
+/*
+==================================================
+INITIAL LOAD
+==================================================
+*/
+
+loadUser();
+
+loadTournaments();
+
+</script>
+
+</body>
+  </html>
