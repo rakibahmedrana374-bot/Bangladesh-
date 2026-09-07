@@ -1,73 +1,226 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LudoArena</title>
-<style>
-:root{--p:#6c2cff;--bg:#0d0e15;--card:#181a27;--line:#292c3d;--muted:#a7a9b8}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#fff;font-family:Arial,sans-serif}a{text-decoration:none;color:inherit}
-.container{max-width:1120px;margin:auto;padding:0 18px}header{position:sticky;top:0;z-index:10;background:#0d0e15ee;border-bottom:1px solid var(--line)}
-.nav{height:68px;display:flex;align-items:center;justify-content:space-between}.brand{font-size:23px;font-weight:800}.brand span{color:var(--p)}
-nav{display:flex;gap:20px}nav a{color:#ddd;font-size:14px}.btn{border:0;border-radius:10px;padding:12px 17px;font-weight:700;cursor:pointer}.primary{background:var(--p);color:#fff}.secondary{background:#292c3d;color:#fff}
-.hero{padding:75px 0;background:radial-gradient(circle at 80% 20%,#39207b,transparent 35%)}.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:35px;align-items:center}
-.tag{background:#21163e;color:#cbb8ff;padding:8px 12px;border-radius:30px;font-size:13px}h1{font-size:52px;line-height:1.05;margin:18px 0}h1 span{color:#a982ff}.hero p{color:var(--muted);font-size:17px;line-height:1.7}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
-.phone{background:#171a29;border:1px solid var(--line);border-radius:25px;padding:20px}.screen{background:#0e1019;border-radius:20px;padding:20px}.balance{background:linear-gradient(135deg,#6c2cff,#9d70ff);padding:20px;border-radius:17px}.balance strong{display:block;font-size:30px;margin-top:8px}
-section{padding:60px 0}.title{text-align:center;margin-bottom:30px}.title h2{font-size:32px}.title p,.card p{color:var(--muted);line-height:1.6}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card,.pay{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{text-align:center;background:var(--card);border:1px solid var(--line);padding:20px;border-radius:14px}.stat b{display:block;font-size:28px;color:#b493ff}.stat span{color:var(--muted);font-size:13px}
-.payment{display:grid;grid-template-columns:1fr 1fr;gap:18px}.pay-logo{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900}.bk{background:#e2136e}.ng{background:#f58220}.number{display:flex;gap:8px;margin:14px 0}.input,.form input{width:100%;padding:13px;background:#0f111a;border:1px solid #34384d;color:#fff;border-radius:9px}.copy{background:#303449;color:#fff;border:0;border-radius:9px;padding:0 14px;cursor:pointer}
-.tournament{display:flex;justify-content:space-between;align-items:center}.prize{color:#5ee6ba;font-weight:800}
-footer{border-top:1px solid var(--line);padding:35px;text-align:center;color:var(--muted)}
-.modal{display:none;position:fixed;inset:0;background:#000b;z-index:50;align-items:center;justify-content:center;padding:15px}.modal.show{display:flex}.modal-box{width:min(440px,100%);background:var(--card);border:1px solid var(--line);border-radius:18px;padding:25px;position:relative}.close{position:absolute;right:14px;top:10px;background:none;border:0;color:#aaa;font-size:25px}.form{display:grid;gap:12px}.switch{color:#a982ff;cursor:pointer}.toast{position:fixed;right:18px;bottom:18px;background:#292c3d;padding:14px 18px;border-radius:10px;display:none;z-index:80}
-@media(max-width:800px){nav{display:none}.hero-grid,.payment{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}h1{font-size:40px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>পেমেন্ট মেথড সিলেক্ট করুন</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .payment-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            padding: 25px 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .payment-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        .payment-options {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .payment-card {
+            flex: 1;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .payment-card img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+
+        .payment-card span {
+            font-size: 15px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        /* Selected State Styling */
+        .payment-card.bkash-active {
+            border-color: #e2136e;
+            background-color: #fff0f5;
+        }
+
+        .payment-card.nagad-active {
+            border-color: #f7931e;
+            background-color: #fff6ed;
+        }
+
+        /* Number Display Box */
+        .number-display-box {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .bkash-box {
+            background-color: #fce4ec;
+            border: 1px solid #e2136e;
+            color: #ad1457;
+        }
+
+        .nagad-box {
+            background-color: #fff3e0;
+            border: 1px solid #f7931e;
+            color: #e65100;
+        }
+
+        .number-title {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .number-value {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .copy-btn {
+            background: rgba(0, 0, 0, 0.08);
+            border: none;
+            padding: 4px 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
-<header><div class="container nav">
-<div class="brand">Ludo<span>Arena</span></div>
-<nav><a href="#home">Home</a><a href="#tournaments">Tournaments</a><a href="#matches">Matches</a><a href="#payment">Payment</a><a href="#how">How to Play</a></nav>
-<div><button class="btn secondary" onclick="openM('login')">Login</button> <button class="btn primary" onclick="openM('register')">Register</button></div>
-</div></header>
 
-<section class="hero" id="home"><div class="container hero-grid">
-<div><span class="tag">🎮 Online Ludo Tournament</span><h1>Play Ludo.<br><span>Win Rewards.</span></h1><p>Register, join tournaments and manage your wallet. This frontend is prepared for your future backend/API.</p>
-<div class="actions"><button class="btn primary" onclick="openM('register')">Create Account</button><a class="btn secondary" href="#tournaments">View Tournaments</a></div></div>
-<div class="phone"><div class="screen"><div class="balance"><small>Wallet Balance</small><strong>৳ 0.00</strong></div><div class="card" style="margin-top:14px"><b>Next Tournament</b><p>Entry ৳10 • Prize ৳500</p><button class="btn primary" style="width:100%" onclick="openM('login')">Join Now</button></div></div></div>
-</div></section>
+    <div class="payment-container">
+        <h2 class="payment-title">পেমেন্ট মেথড নির্বাচন করুন</h2>
+        
+        <div class="payment-options">
+            <!-- bKash Button -->
+            <div class="payment-card" id="bkashBtn" onclick="selectPayment('bkash')">
+                <!-- Vector SVG for Official Original bKash Logo Style -->
+                <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" rx="18" fill="#e2136e"/>
+                    <path d="M22 30L48 50L22 70V30Z" fill="white"/>
+                    <path d="M52 50L78 30V70L52 50Z" fill="white"/>
+                    <path d="M48 20L78 20L50 46L48 20Z" fill="#ffbade"/>
+                </svg>
+                <span>bKash</span>
+            </div>
 
-<section><div class="container"><div class="stats"><div class="stat"><b>1K+</b><span>Players</span></div><div class="stat"><b>50+</b><span>Tournaments</span></div><div class="stat"><b>৳10K+</b><span>Prize Pool</span></div><div class="stat"><b>24/7</b><span>Support</span></div></div></div></section>
+            <!-- Nagad Button -->
+            <div class="payment-card" id="nagadBtn" onclick="selectPayment('nagad')">
+                <!-- Vector SVG for Official Original Nagad Logo Style -->
+                <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" rx="18" fill="#f7931e"/>
+                    <circle cx="50" cy="50" r="30" fill="#d8232a"/>
+                    <path d="M35 65C35 65 40 35 50 35C60 35 65 65 65 65" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                </svg>
+                <span>Nagad</span>
+            </div>
+        </div>
 
-<section id="matches"><div class="container"><div class="title"><h2>🎮 Matches</h2><p>Match code এখানে লিখে Save করুন। Refresh করলেও থাকবে।</p></div><div class="card" style="max-width:650px;margin:auto"><textarea id="matchCode" class="input" rows="5" placeholder="Match code লিখুন..."></textarea><br><br><button id="saveMatch" class="btn" style="background:#e21313;color:#fff;width:100%" onclick="saveMatchCode()">Save</button></div></div></section>
+        <!-- bKash Number Box -->
+        <div id="bkashBox" class="number-display-box bkash-box">
+            <div class="number-title">bKash Personal Number:</div>
+            <div class="number-value">
+                <span id="bkashNum">01700000000</span>
+                <button class="copy-btn" onclick="copyNumber('bkashNum')">Copy</button>
+            </div>
+        </div>
 
-<section id="tournaments"><div class="container"><div class="title"><h2>Live Tournaments</h2><p>Change tournament names, fees and prizes anytime.</p></div><div class="grid">
-<div class="card"><div class="tournament"><div><h3>Daily Ludo</h3><p>Entry Fee: ৳10</p></div><div class="prize">৳500</div></div><button class="btn primary" style="width:100%" onclick="openM('login')">Join Tournament</button></div>
-<div class="card"><div class="tournament"><div><h3>Pro Battle</h3><p>Entry Fee: ৳20</p></div><div class="prize">৳1,000</div></div><button class="btn primary" style="width:100%" onclick="openM('login')">Join Tournament</button></div>
-<div class="card"><div class="tournament"><div><h3>Night Cup</h3><p>Entry Fee: ৳50</p></div><div class="prize">৳2,500</div></div><button class="btn primary" style="width:100%" onclick="openM('login')">Join Tournament</button></div>
-</div></div></section>
+        <!-- Nagad Number Box -->
+        <div id="nagadBox" class="number-display-box nagad-box">
+            <div class="number-title">Nagad Personal Number:</div>
+            <div class="number-value">
+                <span id="nagadNum">01800000000</span>
+                <button class="copy-btn" onclick="copyNumber('nagadNum')">Copy</button>
+            </div>
+        </div>
+    </div>
 
-<section id="payment"><div class="container"><div class="title"><h2>Deposit / Payment</h2><p>Payment number and Transaction ID section.</p></div><div class="payment">
-<div class="pay"><div class="pay-logo bk">b</div><h3>bKash</h3><div class="number"><input class="input" id="bkash" value="01301470686" readonly><button class="copy" onclick="copyNo('bkash')">Copy</button></div><p>Payment করার পর Transaction ID submit করুন।</p></div>
-<div class="pay"><div class="pay-logo ng">N</div><h3>Nagad</h3><div class="number"><input class="input" id="nagad" value="01301470686" readonly><button class="copy" onclick="copyNo('nagad')">Copy</button></div><p>Payment করার পর Transaction ID submit করুন।</p></div>
-</div><div class="card" style="max-width:650px;margin:20px auto"><h3>Transaction ID</h3><input class="input" id="txid" placeholder="Transaction ID লিখুন"><br><br><button class="btn primary" onclick="submitTx()">Submit Transaction ID</button></div></div></section>
+    <script>
+        function selectPayment(type) {
+            const bkashBtn = document.getElementById('bkashBtn');
+            const nagadBtn = document.getElementById('nagadBtn');
+            const bkashBox = document.getElementById('bkashBox');
+            const nagadBox = document.getElementById('nagadBox');
 
-<section id="how"><div class="container"><div class="title"><h2>How to Play</h2></div><div class="grid">
-<div class="card"><h3>1. Register</h3><p>Account তৈরি করুন।</p></div><div class="card"><h3>2. Deposit</h3><p>Payment করুন এবং TxID দিন।</p></div><div class="card"><h3>3. Join</h3><p>Tournament বেছে Join করুন।</p></div>
-</div></div></section>
-<section><div class="container"><div class="title"><h2>Features</h2></div><div class="grid"><div class="card"><h3>🏆 Tournaments</h3><p>Multiple entry fee and prize options.</p></div><div class="card"><h3>💳 Payments</h3><p>bKash/Nagad payment UI with copy buttons.</p></div><div class="card"><h3>🔒 Backend Ready</h3><p>Registration and transaction UI is ready for API integration.</p></div></div></div></section>
-<footer>© 2026 LudoArena. All rights reserved.</footer>
+            // Reset classes & visibility
+            bkashBtn.classList.remove('bkash-active');
+            nagadBtn.classList.remove('nagad-active');
+            bkashBox.style.display = 'none';
+            nagadBox.style.display = 'none';
 
-<div class="modal" id="login"><div class="modal-box"><button class="close" onclick="closeM('login')">×</button><h2>Login</h2><div class="form"><input placeholder="Phone / Email"><input type="password" placeholder="Password"><button class="btn primary" onclick="demoLogin()">Login</button><p>Account নেই? <span class="switch" onclick="closeM('login');openM('register')">Register</span></p></div></div></div>
-<div class="modal" id="register"><div class="modal-box"><button class="close" onclick="closeM('register')">×</button><h2>Create Account</h2><div class="form"><input id="name" placeholder="Full Name"><input id="phone" placeholder="Mobile Number"><input id="pass" type="password" placeholder="Password"><input id="confirm" type="password" placeholder="Confirm Password"><button class="btn primary" onclick="registerDemo()">Register</button><p>Already have an account? <span class="switch" onclick="closeM('register');openM('login')">Login</span></p></div></div></div>
-<div class="toast" id="toast"></div>
-<script>
-function openM(id){document.getElementById(id).classList.add('show')}function closeM(id){document.getElementById(id).classList.remove('show')}
-function show(msg){let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window.tm);window.tm=setTimeout(()=>t.style.display='none',2500)}
-function copyNo(id){let v=document.getElementById(id).value;if(navigator.clipboard)navigator.clipboard.writeText(v).then(()=>show('Number copied: '+v));else{let x=document.createElement('textarea');x.value=v;document.body.appendChild(x);x.select();document.execCommand('copy');x.remove();show('Number copied: '+v)}}
-function submitTx(){let v=document.getElementById('txid').value.trim();show(v?'Transaction ID submitted (demo)':'Transaction ID দিন')}
-function registerDemo(){let n=document.getElementById('name').value.trim(),p=document.getElementById('phone').value.trim(),a=document.getElementById('pass').value,c=document.getElementById('confirm').value;if(!n||!p||!a)return show('সব তথ্য পূরণ করুন');if(a!==c)return show('Password মিলছে না');closeM('register');show('Registration successful (demo)')}
-function demoLogin(){closeM('login');show('Login demo — backend পরে connect করতে হবে')}
-function saveMatchCode(){let v=document.getElementById('matchCode').value;localStorage.setItem('ludoarena_match_code',v);let b=document.getElementById('saveMatch');b.style.background='#16a34a';show('Match code saved');}
-window.addEventListener('DOMContentLoaded',()=>{let v=localStorage.getItem('ludoarena_match_code');if(v!==null)document.getElementById('matchCode').value=v;});
-window.onclick=e=>{if(e.target.classList.contains('modal'))e.target.classList.remove('show')}
-</script>
-</body></html>
+            if (type === 'bkash') {
+                bkashBtn.classList.add('bkash-active');
+                bkashBox.style.display = 'block';
+            } else if (type === 'nagad') {
+                nagadBtn.classList.add('nagad-active');
+                nagadBox.style.display = 'block';
+            }
+        }
+
+        function copyNumber(elementId) {
+            const numText = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(numText).then(() => {
+                alert('নাম্বারটি কপি করা হয়েছে: ' + numText);
+            });
+        }
+    </script>
+</body>
+</html>
