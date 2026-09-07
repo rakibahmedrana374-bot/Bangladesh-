@@ -3,224 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>পেমেন্ট মেথড সিলেক্ট করুন</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f4f7f6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .payment-container {
-            background: #ffffff;
-            width: 100%;
-            max-width: 420px;
-            padding: 25px 20px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            text-align: center;
-        }
-
-        .payment-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #333333;
-            margin-bottom: 20px;
-        }
-
-        .payment-options {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .payment-card {
-            flex: 1;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 15px 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: #fff;
-        }
-
-        .payment-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        .payment-card img {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-            margin-bottom: 8px;
-        }
-
-        .payment-card span {
-            font-size: 15px;
-            font-weight: 600;
-            color: #444;
-        }
-
-        /* Selected State Styling */
-        .payment-card.bkash-active {
-            border-color: #e2136e;
-            background-color: #fff0f5;
-        }
-
-        .payment-card.nagad-active {
-            border-color: #f7931e;
-            background-color: #fff6ed;
-        }
-
-        /* Number Display Box */
-        .number-display-box {
-            display: none;
-            margin-top: 15px;
-            padding: 15px;
-            border-radius: 10px;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .bkash-box {
-            background-color: #fce4ec;
-            border: 1px solid #e2136e;
-            color: #ad1457;
-        }
-
-        .nagad-box {
-            background-color: #fff3e0;
-            border: 1px solid #f7931e;
-            color: #e65100;
-        }
-
-        .number-title {
-            font-size: 14px;
-            margin-bottom: 6px;
-        }
-
-        .number-value {
-            font-size: 20px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .copy-btn {
-            background: rgba(0, 0, 0, 0.08);
-            border: none;
-            padding: 4px 8px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: background 0.2s;
-        }
-
-        .copy-btn:hover {
-            background: rgba(0, 0, 0, 0.15);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    <title>bKash & Nagad Payment Integration</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Payment Section Wrapper -->
     <div class="payment-container">
-        <h2 class="payment-title">পেমেন্ট মেথড নির্বাচন করুন</h2>
+        <h3>পেমেন্ট মেথড নির্বাচন করুন</h3>
         
-        <div class="payment-options">
+        <div class="payment-buttons">
             <!-- bKash Button -->
-            <div class="payment-card" id="bkashBtn" onclick="selectPayment('bkash')">
-                <!-- Vector SVG for Official Original bKash Logo Style -->
-                <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100" height="100" rx="18" fill="#e2136e"/>
-                    <path d="M22 30L48 50L22 70V30Z" fill="white"/>
-                    <path d="M52 50L78 30V70L52 50Z" fill="white"/>
-                    <path d="M48 20L78 20L50 46L48 20Z" fill="#ffbade"/>
-                </svg>
+            <button type="button" class="payment-btn bkash-btn" onclick="showPaymentNumber('bkash')">
+                <img src="https://raw.githubusercontent.com/bKash-Developer/bKash-merchant-API-documents/master/assets/bkash_logo.png" alt="bKash" class="payment-icon">
                 <span>bKash</span>
-            </div>
+            </button>
 
             <!-- Nagad Button -->
-            <div class="payment-card" id="nagadBtn" onclick="selectPayment('nagad')">
-                <!-- Vector SVG for Official Original Nagad Logo Style -->
-                <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100" height="100" rx="18" fill="#f7931e"/>
-                    <circle cx="50" cy="50" r="30" fill="#d8232a"/>
-                    <path d="M35 65C35 65 40 35 50 35C60 35 65 65 65 65" stroke="white" stroke-width="8" stroke-linecap="round"/>
-                </svg>
+            <button type="button" class="payment-btn nagad-btn" onclick="showPaymentNumber('nagad')">
+                <img src="https://download.logo.wine/logo/Nagad/Nagad-Logo.wine.png" alt="Nagad" class="payment-icon">
                 <span>Nagad</span>
-            </div>
+            </button>
         </div>
 
-        <!-- bKash Number Box -->
-        <div id="bkashBox" class="number-display-box bkash-box">
-            <div class="number-title">bKash Personal Number:</div>
-            <div class="number-value">
-                <span id="bkashNum">01700000000</span>
-                <button class="copy-btn" onclick="copyNumber('bkashNum')">Copy</button>
-            </div>
-        </div>
-
-        <!-- Nagad Number Box -->
-        <div id="nagadBox" class="number-display-box nagad-box">
-            <div class="number-title">Nagad Personal Number:</div>
-            <div class="number-value">
-                <span id="nagadNum">01800000000</span>
-                <button class="copy-btn" onclick="copyNumber('nagadNum')">Copy</button>
-            </div>
+        <!-- Number Display Area -->
+        <div id="payment-details" class="payment-details" style="display: none;">
+            <p id="payment-text"></p>
         </div>
     </div>
 
-    <script>
-        function selectPayment(type) {
-            const bkashBtn = document.getElementById('bkashBtn');
-            const nagadBtn = document.getElementById('nagadBtn');
-            const bkashBox = document.getElementById('bkashBox');
-            const nagadBox = document.getElementById('nagadBox');
-
-            // Reset classes & visibility
-            bkashBtn.classList.remove('bkash-active');
-            nagadBtn.classList.remove('nagad-active');
-            bkashBox.style.display = 'none';
-            nagadBox.style.display = 'none';
-
-            if (type === 'bkash') {
-                bkashBtn.classList.add('bkash-active');
-                bkashBox.style.display = 'block';
-            } else if (type === 'nagad') {
-                nagadBtn.classList.add('nagad-active');
-                nagadBox.style.display = 'block';
-            }
-        }
-
-        function copyNumber(elementId) {
-            const numText = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(numText).then(() => {
-                alert('নাম্বারটি কপি করা হয়েছে: ' + numText);
-            });
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
