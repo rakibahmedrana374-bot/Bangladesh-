@@ -1,7 +1,2 @@
-# bKash & Nagad Payment Integration Feature
-
-আপনার প্রজেক্টে এই ফিচারটি যুক্ত করার উপায়:
-
-১. `index.html` থেকে HTML অংশটি কপি করে আপনার প্রজেক্টের কাঙ্ক্ষিত স্থানে বসান।
-২. `style.css` এর কোডটি আপনার CSS ফাইলে যুক্ত করুন।
-৩. `script.js` এর কোডটি আপনার JS ফাইলে যুক্ত করুন এবং `paymentNumbers` অবজেক্টে আপনার আসল বিকাশ ও নগদ নম্বর বসিয়ে নিন।
+LudoArena Master Fixed
+Use this as the frontend master version. It keeps Login/Register, Home, Wallet, Profile, Matches and Admin controls. API: https://ludo-master-v71z.onrender.com
