@@ -229,4 +229,61 @@ async function boot(){renderMatches();try{const r=await fetch(API+'/health');$('
   }
 })();
 </script>
+
+<script>
+(function(){
+  const KEY = 'LUDO_LAST_VIEW';
+
+  // Save the current page/section whenever navigation happens.
+  const oldShowView = window.showView;
+  if (typeof oldShowView === 'function') {
+    window.showView = function(v) {
+      if (v) localStorage.setItem(KEY, v);
+      return oldShowView.apply(this, arguments);
+    };
+  }
+
+  // Restore the exact section after a refresh, but only after login/dashboard exists.
+  function restoreLastView(){
+    if (!localStorage.getItem('token') && !(typeof tok === 'function' && tok())) return;
+    const v = localStorage.getItem(KEY);
+    if (!v) return;
+    setTimeout(function(){
+      if (typeof showView === 'function') showView(v);
+    }, 50);
+  }
+
+  // Common token key fallback used by this project.
+  document.addEventListener('DOMContentLoaded', function(){
+    restoreLastView();
+  });
+
+  // If loginUser is available, restore after successful login.
+  const oldLoginUser = window.loginUser;
+  if (typeof oldLoginUser === 'function') {
+    window.loginUser = async function(){
+      const r = await oldLoginUser.apply(this, arguments);
+      restoreLastView();
+      return r;
+    };
+  }
+
+  // Do not leave a stale view after logout.
+  const oldLogout = window.logout;
+  if (typeof oldLogout === 'function') {
+    window.logout = function(){
+      localStorage.removeItem(KEY);
+      return oldLogout.apply(this, arguments);
+    };
+  }
+
+  // Capture direct calls to showView that may happen before our wrapper is installed.
+  window.addEventListener('beforeunload', function(){
+    const active = document.querySelector('.view.active');
+    if (active && active.id) {
+      localStorage.setItem(KEY, active.id.replace(/^view-/, ''));
+    }
+  });
+})();
+</script>
 </body></html>
