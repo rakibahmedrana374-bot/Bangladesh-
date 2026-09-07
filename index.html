@@ -42,14 +42,16 @@ button{cursor:pointer}
 .view{display:none}
 .view.active{display:block}
 .walletgrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.pay{padding:20px;border:1px solid #282d40;background:#141824;border-radius:16px}
-.paylogo{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:900;margin-bottom:12px}
-.bk{background:#e2136e}
-.ng{background:#f58220}
-.number{display:flex;gap:8px;margin-top:15px}
-.paybtn{width:100%;margin-top:12px}
-.paynum{display:none;margin-top:12px}
+.pay{padding:22px;border:1px solid #282d40;background:#141824;border-radius:18px}
+.payheader{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.payicon{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;padding:8px}
+.bk-icon{background:#e2136e}
+.ng-icon{background:#ffffff}
+.paybtn{width:100%;margin-top:10px}
+.paynum{display:none;margin-top:14px;flex-direction:column;gap:8px;background:#0c0f17;padding:14px;border-radius:12px;border:1px solid #2a2f44}
 .paynum.show{display:flex!important}
+.paydetails{display:flex;justify-content:space-between;align-items:center;font-weight:bold;font-size:15px}
+.badge-personal{background:#2a2045;color:#b282ff;padding:3px 8px;border-radius:6px;font-size:12px;border:1px solid #4a3875}
 .input{width:100%;padding:13px;border-radius:10px;border:1px solid #34394d;background:#0c0f17;color:#fff;outline:none}
 .form{display:grid;gap:12px}
 .label{font-size:13px;color:#c5c9d5}
@@ -143,27 +145,65 @@ button{cursor:pointer}
     <section id="view-wallet" class="view">
       <h2>Wallet</h2>
       <div class="walletgrid">
+        <!-- bKash Box -->
         <div class="pay">
-          <div class="paylogo bk">bKash</div>
-          <h3>bKash</h3>
+          <div class="payheader">
+            <div class="payicon bk-icon">
+              <!-- Original bKash SVG Logo -->
+              <svg viewBox="0 0 100 100" width="36" height="36">
+                <path fill="#FFFFFF" d="M15 20 L55 20 L35 50 Z"/>
+                <path fill="#FFFFFF" d="M38 52 L85 20 L60 80 Z"/>
+                <path fill="#FFFFFF" d="M15 25 L33 52 L15 80 Z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 style="margin:0">bKash</h3>
+              <span class="muted" style="font-size:12px">Personal Cash In / Send Money</span>
+            </div>
+          </div>
           <button class="btn primary paybtn" onclick="togglePay('bkashBox')">bKash Number দেখুন</button>
-          <div id="bkashBox" class="number paynum">
-            <input id="bkashNumInput" class="input" value="01301470686" readonly>
-            <button class="btn" onclick="copyText('01301470686')">Copy</button>
+          <div id="bkashBox" class="paynum">
+            <div class="paydetails">
+              <span>bKash <span style="color:#e2136e">01301470686</span></span>
+              <span class="badge-personal">Personal</span>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:6px">
+              <input id="bkashNumInput" class="input" value="01301470686" readonly style="font-weight:bold;letter-spacing:1px">
+              <button class="btn primary" onclick="copyText('01301470686')">Copy</button>
+            </div>
           </div>
         </div>
+
+        <!-- Nagad Box -->
         <div class="pay">
-          <div class="paylogo ng">Nagad</div>
-          <h3>Nagad</h3>
-          <button class="btn primary paybtn" onclick="togglePay('nagadBox')">Nagad Number দেখুন</button>
-          <div id="nagadBox" class="number paynum">
-            <input id="nagadNumInput" class="input" value="01806097369" readonly>
-            <button class="btn" onclick="copyText('01806097369')">Copy</button>
+          <div class="payheader">
+            <div class="payicon ng-icon">
+              <!-- Original Nagad SVG Logo -->
+              <svg viewBox="0 0 100 100" width="38" height="38">
+                <path fill="#F58220" d="M20 75 C 10 50, 25 20, 50 20 C 75 20, 90 40, 80 75 C 70 60, 50 65, 35 50 C 30 65, 25 70, 20 75 Z"/>
+                <path fill="#E02B20" d="M35 50 C 50 65, 70 60, 80 75 C 60 90, 30 85, 20 75 C 25 70, 30 65, 35 50 Z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 style="margin:0">Nagad</h3>
+              <span class="muted" style="font-size:12px">Personal Cash In / Send Money</span>
+            </div>
+          </div>
+          <button class="btn primary paybtn" style="background:#f58220" onclick="togglePay('nagadBox')">Nagad Number দেখুন</button>
+          <div id="nagadBox" class="paynum">
+            <div class="paydetails">
+              <span>Nagad <span style="color:#f58220">01806097369</span></span>
+              <span class="badge-personal">Personal</span>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:6px">
+              <input id="nagadNumInput" class="input" value="01806097369" readonly style="font-weight:bold;letter-spacing:1px">
+              <button class="btn" style="background:#f58220;color:#fff" onclick="copyText('01806097369')">Copy</button>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="card" style="margin-top:15px">
+      <div class="card" style="margin-top:18px">
         <h3>Deposit Request</h3>
         <div class="form">
           <label class="label">Amount</label>
@@ -309,7 +349,6 @@ function copyText(txt){
 
 const MATCH_CONFIG={name:'1vs1 Match',entryFee:60,winning:110,boxes:1};
 
-// Helper to load match state from LocalStorage
 function getSavedMatches(){
   const saved = localStorage.getItem('ludoarena_match_codes');
   if(saved){
